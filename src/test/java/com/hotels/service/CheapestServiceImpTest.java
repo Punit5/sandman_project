@@ -1,15 +1,18 @@
 package com.hotels.service;
 
 
+import com.hotels.bean.Address;
+import com.hotels.bean.Contact;
 import com.hotels.bean.HotelInfo;
+import com.hotels.bean.TotalPrice;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,6 +30,8 @@ public class CheapestServiceImpTest {
 
     final String locationToTest = "YVY";
     final String dateToTest = "2018-05-06";
+    final Address addressToTest = new Address();
+    final List<Contact> contactsToTest = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
@@ -43,9 +48,9 @@ public class CheapestServiceImpTest {
     @Test
     public void getHotelLessThanThree() {
         final List<HotelInfo> hotelInfos = Stream.of(new HotelInfo.Builder("abc")
-                .withAddress("Vancouver")
-                .withPhoneNumber(9999999)
-                .withPrice(20.0).buid()).collect(Collectors.toList());
+                .withAddress(addressToTest)
+                .withContact(contactsToTest)
+                .withPrice(new TotalPrice(20.0,"US")).buid()).collect(Collectors.toList());
 
 
         when(allHotelService.getInfo(locationToTest, dateToTest, dateToTest)).thenReturn(hotelInfos);
@@ -55,13 +60,13 @@ public class CheapestServiceImpTest {
     @Test
     public void getHotel() {
         final HotelInfo.Builder builder = new HotelInfo.Builder("XYz")
-                .withAddress("Vancouver")
-                .withPhoneNumber(9090);
+                .withAddress(addressToTest)
+                .withContact(contactsToTest);
 
-        final HotelInfo hotelInfo1 = builder.withPrice(20.0).buid();
-        final HotelInfo hotelInfo2 = builder.withPrice(10.0).buid();
-        final HotelInfo hotelInfo3 = builder.withPrice(50.0).buid();
-        final HotelInfo hotelInfo4 = builder.withPrice(40.0).buid();
+        final HotelInfo hotelInfo1 = builder.withPrice(new TotalPrice(20.0,"US")).buid();
+        final HotelInfo hotelInfo2 = builder.withPrice(new TotalPrice(10.0,"US")).buid();
+        final HotelInfo hotelInfo3 = builder.withPrice(new TotalPrice(50.0,"US")).buid();
+        final HotelInfo hotelInfo4 = builder.withPrice(new TotalPrice(40.0,"US")).buid();
 
         when(allHotelService.getInfo(locationToTest, dateToTest, dateToTest)).thenReturn(Stream.of(hotelInfo1,
                 hotelInfo2,

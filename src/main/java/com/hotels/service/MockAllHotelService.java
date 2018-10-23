@@ -3,8 +3,6 @@ package com.hotels.service;
 import com.hotels.bean.HotelInfo;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * At the moment , I am unable to get the api key , to make the actual call.
@@ -15,10 +13,11 @@ public class MockAllHotelService implements AllHotelService {
 
     @Override
     public List<HotelInfo> getInfo(String location, String checkinDate, String checkOutDate) {
-        return Stream.of(new HotelInfo.Builder("ABC hotel")
+        /*return Stream.of(new HotelInfo.Builder("ABC hotel")
                 .withAddress("vancouer")
-                .withPhoneNumber(9090)
+                .withContact(9090)
                 .withPrice(20.0)
-                .buid()).collect(Collectors.toList());
+                .buid()).collect(Collectors.toList());*/
+        return null;
     }
 }
