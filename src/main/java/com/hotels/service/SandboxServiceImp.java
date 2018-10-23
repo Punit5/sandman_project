@@ -10,7 +10,7 @@ public class SandboxServiceImp implements AllHotelService {
     private static final String url=" https://sandbox.amadeus.com/travel-innovation-sandbox/apis/get/hotels/search-airport";
 
     //TODO : method to get all hotel info for date provided.
-    public List<HotelInfo> getInfo(String location, Date checkinDate) {
+    public List<HotelInfo> getInfo(String location, String checkinDate, String checkOutDate) {
         return null;
     }
 }

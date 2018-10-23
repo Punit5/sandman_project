@@ -19,8 +19,8 @@ public class CheapestServiceImp implements CheapestService {
     }
 
 
-    public List<HotelInfo> getHotel(String code, Date date) {
-        List<HotelInfo> info = allHotelService.getInfo(code, date);
+    public List<HotelInfo> getHotel(String code, String checkInDate, String checkOutDate) {
+        List<HotelInfo> info = allHotelService.getInfo(code, checkInDate, checkOutDate);
         if (info == null || info.isEmpty())
             return Collections.emptyList();
         if (info.size() <= MAX_RESULTS)

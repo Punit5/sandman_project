@@ -26,7 +26,7 @@ public class CheapestServiceImpTest {
     private CheapestServiceImp cheapestServiceImp;
 
     final String locationToTest = "YVY";
-    final Date dateToTest = new Date();
+    final String dateToTest = "2018-05-06";
 
     @Before
     public void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class CheapestServiceImpTest {
 
     @Test
     public void getHotelNull() {
-        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest),
+        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest, dateToTest),
                 Collections.EMPTY_LIST);
     }
 
@@ -48,8 +48,8 @@ public class CheapestServiceImpTest {
                 .withPrice(20.0).buid()).collect(Collectors.toList());
 
 
-        when(allHotelService.getInfo(locationToTest, dateToTest)).thenReturn(hotelInfos);
-        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest), hotelInfos);
+        when(allHotelService.getInfo(locationToTest, dateToTest, dateToTest)).thenReturn(hotelInfos);
+        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest, dateToTest), hotelInfos);
     }
 
     @Test
@@ -63,12 +63,12 @@ public class CheapestServiceImpTest {
         final HotelInfo hotelInfo3 = builder.withPrice(50.0).buid();
         final HotelInfo hotelInfo4 = builder.withPrice(40.0).buid();
 
-        when(allHotelService.getInfo(locationToTest, dateToTest)).thenReturn(Stream.of(hotelInfo1,
+        when(allHotelService.getInfo(locationToTest, dateToTest, dateToTest)).thenReturn(Stream.of(hotelInfo1,
                 hotelInfo2,
                 hotelInfo3,
                 hotelInfo4).collect(Collectors.toList()));
 
-        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest),
+        assertEquals(cheapestServiceImp.getHotel(locationToTest, dateToTest, dateToTest),
                 Stream.of(hotelInfo2, hotelInfo1, hotelInfo4).collect(Collectors.toList()));
     }
 }
